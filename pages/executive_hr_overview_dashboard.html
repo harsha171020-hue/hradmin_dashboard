@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Executive HR Overview Dashboard - HRAdmin</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fhradminda2006back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background text-text-primary font-inter">
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-subtle">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M12 14h8v2h-8v-2zm0 4h6v2h-6v-2z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-text-primary">HRAdmin</h1>
+                        <p class="text-xs text-text-secondary">Executive Dashboard</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="executive_hr_overview_dashboard.html" class="bg-primary text-white px-3 py-2 rounded-md text-sm font-medium">Overview</a>
+                        <a href="real_time_attendance_monitoring_dashboard.html" class="text-text-secondary hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-smooth">Attendance</a>
+                        <a href="payroll_analytics_and_cost_intelligence_dashboard.html" class="text-text-secondary hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-smooth">Payroll</a>
+                        <a href="employee_performance_and_productivity_analytics_dashboard.html" class="text-text-secondary hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-smooth">Performance</a>
+                        <a href="compliance_and_audit_trail_dashboard.html" class="text-text-secondary hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-smooth">Compliance</a>
+                    </div>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="bg-surface-700 p-2 rounded-full text-text-secondary hover:text-text-primary transition-smooth">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-12h0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-medium text-text-primary">Sarah Johnson</p>
+                        <p class="text-xs text-text-secondary">CEO</p>
+                    </div>
+                    <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=150&auto=format&fit=crop" alt="Profile" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Controls -->
+        <div class="mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-text-primary">Executive HR Overview</h2>
+                    <p class="text-text-secondary mt-1">Comprehensive workforce intelligence and strategic insights</p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <!-- Date Range Picker -->
+                    <div class="flex items-center space-x-2">
+                        <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <select class="bg-surface border border-subtle rounded-lg px-3 py-2 text-text-primary focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option>Last 30 days</option>
+                            <option>Last 90 days</option>
+                            <option>Last 6 months</option>
+                            <option>Last year</option>
+                            <option>Last 2 years</option>
+                        </select>
+                    </div>
+
+                    <!-- Department Filter -->
+                    <div class="flex items-center space-x-2">
+                        <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                        <select class="bg-surface border border-subtle rounded-lg px-3 py-2 text-text-primary focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option>All Departments</option>
+                            <option>Engineering</option>
+                            <option>Sales</option>
+                            <option>Marketing</option>
+                            <option>HR</option>
+                            <option>Finance</option>
+                        </select>
+                    </div>
+
+                    <!-- Auto Refresh Toggle -->
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-text-secondary">Auto-refresh</span>
+                        <button class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                            <span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6"></span>
+                        </button>
+                        <span class="text-xs text-text-tertiary">15min</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Freshness Indicator -->
+            <div class="mt-4 flex items-center text-xs text-text-tertiary">
+                <div class="h-2 w-2 bg-success rounded-full mr-2 animate-pulse-teal"></div>
+                Last updated: September 7, 2025 at 6:20 AM
+            </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Workforce -->
+            <div class="bg-surface rounded-xl p-6 card-elevation hover-lift transition-smooth">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Total Workforce</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">1,247</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+3.2%</span>
+                            <span class="text-text-tertiary text-sm ml-1">vs last month</span>
+                        </div>
+                    </div>
+                    <div class="bg-primary/10 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Rate -->
+            <div class="bg-surface rounded-xl p-6 card-elevation hover-lift transition-smooth">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Attendance Rate</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">94.7%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+1.8%</span>
+                            <span class="text-text-tertiary text-sm ml-1">vs last month</span>
+                        </div>
+                    </div>
+                    <div class="bg-success/10 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payroll Costs vs Budget -->
+            <div class="bg-surface rounded-xl p-6 card-elevation hover-lift transition-smooth">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Payroll vs Budget</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">$2.4M</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-warning mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-warning text-sm font-medium">+2.1%</span>
+                            <span class="text-text-tertiary text-sm ml-1">over budget</span>
+                        </div>
+                    </div>
+                    <div class="bg-warning/10 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Turnover Rate -->
+            <div class="bg-surface rounded-xl p-6 card-elevation hover-lift transition-smooth">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Turnover Rate</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">8.3%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-error mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-error text-sm font-medium">+0.7%</span>
+                            <span class="text-text-tertiary text-sm ml-1">vs last month</span>
+                        </div>
+                    </div>
+                    <div class="bg-error/10 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Visualization Area -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Workforce Trend Chart -->
+            <div class="bg-surface rounded-xl p-6 card-elevation">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-text-primary">Workforce Trends</h3>
+                        <p class="text-text-secondary text-sm">Hiring and termination patterns</p>
+                    </div>
+                    <button class="text-text-secondary hover:text-text-primary transition-smooth">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="h-80">
+                    <canvas id="workforceTrendChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Payroll Cost Breakdown -->
+            <div class="bg-surface rounded-xl p-6 card-elevation">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-text-primary">Payroll Breakdown</h3>
+                        <p class="text-text-secondary text-sm">Cost distribution and budget variance</p>
+                    </div>
+                    <button class="text-text-secondary hover:text-text-primary transition-smooth">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="h-80">
+                    <canvas id="payrollBreakdownChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance Heatmap -->
+        <div class="bg-surface rounded-xl p-6 card-elevation mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-text-primary">Departmental Attendance Heatmap</h3>
+                    <p class="text-text-secondary text-sm">Weekly attendance patterns across departments</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 text-sm">
+                        <div class="w-3 h-3 bg-error rounded"></div>
+                        <span class="text-text-tertiary">Low (&lt;85%)</span>
+                        <div class="w-3 h-3 bg-warning rounded"></div>
+                        <span class="text-text-tertiary">Medium (85-95%)</span>
+                        <div class="w-3 h-3 bg-success rounded"></div>
+                        <span class="text-text-tertiary">High (&gt;95%)</span>
+                    </div>
+                    <button class="text-text-secondary hover:text-text-primary transition-smooth">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Heatmap Grid -->
+            <div class="overflow-x-auto">
+                <div class="min-w-full">
+                    <div class="grid grid-cols-8 gap-2 text-sm">
+                        <!-- Header Row -->
+                        <div class="text-text-secondary font-medium p-2"></div>
+                        <div class="text-text-secondary font-medium p-2 text-center">Mon</div>
+                        <div class="text-text-secondary font-medium p-2 text-center">Tue</div>
+                        <div class="text-text-secondary font-medium p-2 text-center">Wed</div>
+                        <div class="text-text-secondary font-medium p-2 text-center">Thu</div>
+                        <div class="text-text-secondary font-medium p-2 text-center">Fri</div>
+                        <div class="text-text-secondary font-medium p-2 text-center">Sat</div>
+                        <div class="text-text-secondary font-medium p-2 text-center">Sun</div>
+                        
+                        <!-- Engineering Row -->
+                        <div class="text-text-secondary font-medium p-2">Engineering</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">96%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">94%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">97%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">95%</div>
+                        <div class="bg-warning/20 border border-warning/30 rounded p-2 text-center cursor-pointer hover:bg-warning/30 transition-smooth">89%</div>
+                        <div class="bg-error/20 border border-error/30 rounded p-2 text-center cursor-pointer hover:bg-error/30 transition-smooth">78%</div>
+                        <div class="bg-error/20 border border-error/30 rounded p-2 text-center cursor-pointer hover:bg-error/30 transition-smooth">82%</div>
+                        
+                        <!-- Sales Row -->
+                        <div class="text-text-secondary font-medium p-2">Sales</div>
+                        <div class="bg-warning/20 border border-warning/30 rounded p-2 text-center cursor-pointer hover:bg-warning/30 transition-smooth">91%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">96%</div>
+                        <div class="bg-warning/20 border border-warning/30 rounded p-2 text-center cursor-pointer hover:bg-warning/30 transition-smooth">88%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">93%</div>
+                        <div class="bg-warning/20 border border-warning/30 rounded p-2 text-center cursor-pointer hover:bg-warning/30 transition-smooth">87%</div>
+                        <div class="bg-error/20 border border-error/30 rounded p-2 text-center cursor-pointer hover:bg-error/30 transition-smooth">75%</div>
+                        <div class="bg-error/20 border border-error/30 rounded p-2 text-center cursor-pointer hover:bg-error/30 transition-smooth">79%</div>
+                        
+                        <!-- Marketing Row -->
+                        <div class="text-text-secondary font-medium p-2">Marketing</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">98%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">97%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">95%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">96%</div>
+                        <div class="bg-warning/20 border border-warning/30 rounded p-2 text-center cursor-pointer hover:bg-warning/30 transition-smooth">92%</div>
+                        <div class="bg-warning/20 border border-warning/30 rounded p-2 text-center cursor-pointer hover:bg-warning/30 transition-smooth">86%</div>
+                        <div class="bg-error/20 border border-error/30 rounded p-2 text-center cursor-pointer hover:bg-error/30 transition-smooth">81%</div>
+                        
+                        <!-- HR Row -->
+                        <div class="text-text-secondary font-medium p-2">HR</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">99%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">98%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">97%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">98%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">96%</div>
+                        <div class="bg-warning/20 border border-warning/30 rounded p-2 text-center cursor-pointer hover:bg-warning/30 transition-smooth">88%</div>
+                        <div class="bg-warning/20 border border-warning/30 rounded p-2 text-center cursor-pointer hover:bg-warning/30 transition-smooth">85%</div>
+                        
+                        <!-- Finance Row -->
+                        <div class="text-text-secondary font-medium p-2">Finance</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">97%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">95%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">96%</div>
+                        <div class="bg-success/20 border border-success/30 rounded p-2 text-center cursor-pointer hover:bg-success/30 transition-smooth">94%</div>
+                        <div class="bg-warning/20 border border-warning/30 rounded p-2 text-center cursor-pointer hover:bg-warning/30 transition-smooth">91%</div>
+                        <div class="bg-error/20 border border-error/30 rounded p-2 text-center cursor-pointer hover:bg-error/30 transition-smooth">83%</div>
+                        <div class="bg-error/20 border border-error/30 rounded p-2 text-center cursor-pointer hover:bg-error/30 transition-smooth">77%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Critical Alerts Feed -->
+        <div class="bg-surface rounded-xl p-6 card-elevation">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-text-primary">Critical Alerts</h3>
+                    <p class="text-text-secondary text-sm">Attendance anomalies and payroll exceptions requiring attention</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="bg-error text-white text-xs px-2 py-1 rounded-full">3 High</span>
+                    <span class="bg-warning text-white text-xs px-2 py-1 rounded-full">7 Medium</span>
+                    <button class="text-text-secondary hover:text-text-primary transition-smooth">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="space-y-4 max-h-96 overflow-y-auto">
+                <!-- High Priority Alert -->
+                <div class="flex items-start space-x-4 p-4 bg-error/5 border border-error/20 rounded-lg">
+                    <div class="flex-shrink-0">
+                        <div class="w-3 h-3 bg-error rounded-full mt-2"></div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-sm font-medium text-text-primary">Sales Department - Critical Attendance Drop</h4>
+                            <span class="text-xs text-text-tertiary">2 hours ago</span>
+                        </div>
+                        <p class="text-sm text-text-secondary mt-1">Attendance rate dropped to 75% on Saturday - 15% below threshold. 23 employees absent without notice.</p>
+                        <div class="flex items-center space-x-4 mt-2">
+                            <button class="text-xs text-primary hover:text-primary-600 transition-smooth">View Details</button>
+                            <button class="text-xs text-text-tertiary hover:text-text-secondary transition-smooth">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High Priority Alert -->
+                <div class="flex items-start space-x-4 p-4 bg-error/5 border border-error/20 rounded-lg">
+                    <div class="flex-shrink-0">
+                        <div class="w-3 h-3 bg-error rounded-full mt-2"></div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-sm font-medium text-text-primary">Payroll Budget Variance Alert</h4>
+                            <span class="text-xs text-text-tertiary">4 hours ago</span>
+                        </div>
+                        <p class="text-sm text-text-secondary mt-1">Monthly payroll costs exceeded budget by $52,000 (2.1%). Overtime costs 34% higher than projected.</p>
+                        <div class="flex items-center space-x-4 mt-2">
+                            <button class="text-xs text-primary hover:text-primary-600 transition-smooth">View Analysis</button>
+                            <button class="text-xs text-text-tertiary hover:text-text-secondary transition-smooth">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medium Priority Alert -->
+                <div class="flex items-start space-x-4 p-4 bg-warning/5 border border-warning/20 rounded-lg">
+                    <div class="flex-shrink-0">
+                        <div class="w-3 h-3 bg-warning rounded-full mt-2"></div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-sm font-medium text-text-primary">Engineering - Late Arrival Pattern</h4>
+                            <span class="text-xs text-text-tertiary">6 hours ago</span>
+                        </div>
+                        <p class="text-sm text-text-secondary mt-1">12 employees consistently arriving 15+ minutes late this week. Productivity impact assessment recommended.</p>
+                        <div class="flex items-center space-x-4 mt-2">
+                            <button class="text-xs text-primary hover:text-primary-600 transition-smooth">View Pattern</button>
+                            <button class="text-xs text-text-tertiary hover:text-text-secondary transition-smooth">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medium Priority Alert -->
+                <div class="flex items-start space-x-4 p-4 bg-warning/5 border border-warning/20 rounded-lg">
+                    <div class="flex-shrink-0">
+                        <div class="w-3 h-3 bg-warning rounded-full mt-2"></div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-sm font-medium text-text-primary">Turnover Rate Increase</h4>
+                            <span class="text-xs text-text-tertiary">1 day ago</span>
+                        </div>
+                        <p class="text-sm text-text-secondary mt-1">Employee turnover rate increased by 0.7% this month. Exit interview analysis suggests workload concerns.</p>
+                        <div class="flex items-center space-x-4 mt-2">
+                            <button class="text-xs text-primary hover:text-primary-600 transition-smooth">View Report</button>
+                            <button class="text-xs text-text-tertiary hover:text-text-secondary transition-smooth">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Actions -->
+        <div class="mt-8 flex justify-end">
+            <button class="bg-primary hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-medium transition-smooth flex items-center space-x-2">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <span>Export Executive Summary</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-subtle">
+        <div class="grid grid-cols-5 gap-1">
+            <a href="executive_hr_overview_dashboard.html" class="flex flex-col items-center py-2 px-1 text-primary">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                </svg>
+                <span class="text-xs mt-1">Overview</span>
+            </a>
+            <a href="real_time_attendance_monitoring_dashboard.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-xs mt-1">Attendance</span>
+            </a>
+            <a href="payroll_analytics_and_cost_intelligence_dashboard.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                </svg>
+                <span class="text-xs mt-1">Payroll</span>
+            </a>
+            <a href="employee_performance_and_productivity_analytics_dashboard.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+                <span class="text-xs mt-1">Performance</span>
+            </a>
+            <a href="compliance_and_audit_trail_dashboard.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                <span class="text-xs mt-1">Compliance</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Workforce Trend Chart
+            const workforceCtx = document.getElementById('workforceTrendChart').getContext('2d');
+            new Chart(workforceCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                    datasets: [{
+                        label: 'Total Workforce',
+                        data: [1180, 1195, 1210, 1225, 1240, 1235, 1245, 1250, 1247],
+                        borderColor: '#00CED1',
+                        backgroundColor: 'rgba(0, 206, 209, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'New Hires',
+                        data: [25, 30, 28, 35, 32, 18, 22, 28, 15],
+                        borderColor: '#00C896',
+                        backgroundColor: 'rgba(0, 200, 150, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Terminations',
+                        data: [10, 15, 13, 20, 17, 23, 12, 18, 18],
+                        borderColor: '#FF6B6B',
+                        backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#E0E0E0'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#BDBDBD'
+                            },
+                            grid: {
+                                color: 'rgba(224, 224, 224, 0.1)'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#BDBDBD'
+                            },
+                            grid: {
+                                color: 'rgba(224, 224, 224, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Payroll Breakdown Chart
+            const payrollCtx = document.getElementById('payrollBreakdownChart').getContext('2d');
+            new Chart(payrollCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Base Salary', 'Overtime', 'Benefits', 'Bonuses', 'Other'],
+                    datasets: [{
+                        data: [1800000, 240000, 180000, 120000, 60000],
+                        backgroundColor: [
+                            '#00CED1',
+                            '#00C896',
+                            '#FFB020',
+                            '#FF6B6B',
+                            '#9E9E9E'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#E0E0E0',
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Auto-refresh functionality
+        let autoRefreshInterval;
+        const autoRefreshToggle = document.querySelector('button[class*="bg-primary"]');
+        
+        function toggleAutoRefresh() {
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+                autoRefreshInterval = null;
+                autoRefreshToggle.classList.remove('bg-primary');
+                autoRefreshToggle.classList.add('bg-surface-600');
+                autoRefreshToggle.querySelector('span').classList.remove('translate-x-6');
+                autoRefreshToggle.querySelector('span').classList.add('translate-x-1');
+            } else {
+                autoRefreshInterval = setInterval(() => {
+                    // Simulate data refresh
+                    console.log('Refreshing dashboard data...');
+                    // Update timestamp
+                    const now = new Date();
+                    const timestamp = now.toLocaleString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                        hour: 'numeric',
+                        minute: '2-digit',
+                        hour12: true
+                    });
+                    document.querySelector('.text-text-tertiary').textContent = `Last updated: ${timestamp}`;
+                }, 900000); // 15 minutes
+                
+                autoRefreshToggle.classList.add('bg-primary');
+                autoRefreshToggle.classList.remove('bg-surface-600');
+                autoRefreshToggle.querySelector('span').classList.add('translate-x-6');
+                autoRefreshToggle.querySelector('span').classList.remove('translate-x-1');
+            }
+        }
+
+        // Initialize auto-refresh as enabled
+        toggleAutoRefresh();
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

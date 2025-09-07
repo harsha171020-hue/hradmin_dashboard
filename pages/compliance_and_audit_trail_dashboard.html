@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compliance and Audit Trail Dashboard - HRAdmin</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fhradminda2006back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background text-text-primary font-inter">
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-subtle">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M12 14h8v2h-8v-2zm0 4h6v2h-6v-2z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-text-primary">HRAdmin</h1>
+                        <p class="text-xs text-text-secondary">Compliance Dashboard</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="executive_hr_overview_dashboard.html" class="text-text-secondary hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-smooth">Overview</a>
+                        <a href="real_time_attendance_monitoring_dashboard.html" class="text-text-secondary hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-smooth">Attendance</a>
+                        <a href="payroll_analytics_and_cost_intelligence_dashboard.html" class="text-text-secondary hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-smooth">Payroll</a>
+                        <a href="employee_performance_and_productivity_analytics_dashboard.html" class="text-text-secondary hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-smooth">Performance</a>
+                        <a href="compliance_and_audit_trail_dashboard.html" class="bg-primary text-white px-3 py-2 rounded-md text-sm font-medium">Compliance</a>
+                    </div>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="bg-surface-700 p-2 rounded-full text-text-secondary hover:text-text-primary transition-smooth">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-12h0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-medium text-text-primary">Michael Chen</p>
+                        <p class="text-xs text-text-secondary">Compliance Officer</p>
+                    </div>
+                    <img class="h-8 w-8 rounded-full object-cover" src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Profile" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Controls -->
+        <div class="mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-text-primary">Compliance & Audit Trail</h2>
+                    <p class="text-text-secondary mt-1">Regulatory monitoring and system security analytics</p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <!-- Compliance Period Selector -->
+                    <div class="flex items-center space-x-2">
+                        <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <select class="bg-surface border border-subtle rounded-lg px-3 py-2 text-text-primary focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option>Current Quarter</option>
+                            <option>Last Quarter</option>
+                            <option>Last 6 months</option>
+                            <option>Last year</option>
+                            <option>Last 2 years</option>
+                        </select>
+                    </div>
+
+                    <!-- Regulation Type Filter -->
+                    <div class="flex items-center space-x-2">
+                        <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                        <select class="bg-surface border border-subtle rounded-lg px-3 py-2 text-text-primary focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option>All Regulations</option>
+                            <option>FLSA</option>
+                            <option>FMLA</option>
+                            <option>State Laws</option>
+                            <option>GDPR</option>
+                            <option>SOX</option>
+                        </select>
+                    </div>
+
+                    <!-- Automated Report Scheduling -->
+                    <button class="bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-lg font-medium transition-smooth flex items-center space-x-2">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>Schedule Report</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Data Freshness Indicator -->
+            <div class="mt-4 flex items-center text-xs text-text-tertiary">
+                <div class="h-2 w-2 bg-success rounded-full mr-2 animate-pulse-teal"></div>
+                Last updated: September 7, 2025 at 6:26 AM
+            </div>
+        </div>
+
+        <!-- Compliance Metrics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Violation Count -->
+            <div class="bg-surface rounded-xl p-6 card-elevation hover-lift transition-smooth">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Policy Violations</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">7</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-error mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-error text-sm font-medium">+2</span>
+                            <span class="text-text-tertiary text-sm ml-1">this week</span>
+                        </div>
+                    </div>
+                    <div class="bg-error/10 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audit Readiness Score -->
+            <div class="bg-surface rounded-xl p-6 card-elevation hover-lift transition-smooth">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Audit Readiness</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">92%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+3%</span>
+                            <span class="text-text-tertiary text-sm ml-1">vs last month</span>
+                        </div>
+                    </div>
+                    <div class="bg-success/10 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Integrity Status -->
+            <div class="bg-surface rounded-xl p-6 card-elevation hover-lift transition-smooth">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Data Integrity</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">99.8%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">+0.1%</span>
+                            <span class="text-text-tertiary text-sm ml-1">vs last week</span>
+                        </div>
+                    </div>
+                    <div class="bg-primary/10 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regulatory Risk Assessment -->
+            <div class="bg-surface rounded-xl p-6 card-elevation hover-lift transition-smooth">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Risk Level</p>
+                        <p class="text-3xl font-bold text-text-primary mt-2">Low</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-success text-sm font-medium">Stable</span>
+                            <span class="text-text-tertiary text-sm ml-1">trend</span>
+                        </div>
+                    </div>
+                    <div class="bg-success/10 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
+            <!-- Timeline Visualization (12 cols equivalent) -->
+            <div class="lg:col-span-3 bg-surface rounded-xl p-6 card-elevation">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-text-primary">Compliance Timeline</h3>
+                        <p class="text-text-secondary text-sm">Events, violations, and corrective actions</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="text-text-secondary hover:text-text-primary transition-smooth p-2 rounded-lg hover:bg-surface-700">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </button>
+                        <button class="text-text-secondary hover:text-text-primary transition-smooth p-2 rounded-lg hover:bg-surface-700">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Timeline Chart -->
+                <div class="h-80 mb-6">
+                    <canvas id="complianceTimelineChart"></canvas>
+                </div>
+
+                <!-- Timeline Events -->
+                <div class="space-y-4 max-h-96 overflow-y-auto">
+                    <!-- Critical Event -->
+                    <div class="flex items-start space-x-4 p-4 bg-error/5 border-l-4 border-error rounded-r-lg cursor-pointer hover:bg-error/10 transition-smooth">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-3 h-3 bg-error rounded-full"></div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-sm font-medium text-text-primary">FLSA Overtime Violation Detected</h4>
+                                <span class="text-xs text-text-tertiary">Sep 6, 2025 2:15 PM</span>
+                            </div>
+                            <p class="text-sm text-text-secondary mt-1">Employee worked 52 hours without proper overtime compensation calculation. Requires immediate payroll adjustment.</p>
+                            <div class="flex items-center space-x-4 mt-2">
+                                <span class="text-xs bg-error/20 text-error px-2 py-1 rounded-full">High Priority</span>
+                                <button class="text-xs text-primary hover:text-primary-600 transition-smooth">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warning Event -->
+                    <div class="flex items-start space-x-4 p-4 bg-warning/5 border-l-4 border-warning rounded-r-lg cursor-pointer hover:bg-warning/10 transition-smooth">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-3 h-3 bg-warning rounded-full"></div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-sm font-medium text-text-primary">Unusual Access Pattern</h4>
+                                <span class="text-xs text-text-tertiary">Sep 6, 2025 11:30 AM</span>
+                            </div>
+                            <p class="text-sm text-text-secondary mt-1">Multiple failed login attempts from external IP address. Security monitoring triggered.</p>
+                            <div class="flex items-center space-x-4 mt-2">
+                                <span class="text-xs bg-warning/20 text-warning px-2 py-1 rounded-full">Medium Priority</span>
+                                <button class="text-xs text-primary hover:text-primary-600 transition-smooth">Investigate</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Success Event -->
+                    <div class="flex items-start space-x-4 p-4 bg-success/5 border-l-4 border-success rounded-r-lg cursor-pointer hover:bg-success/10 transition-smooth">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-3 h-3 bg-success rounded-full"></div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-sm font-medium text-text-primary">Corrective Action Completed</h4>
+                                <span class="text-xs text-text-tertiary">Sep 5, 2025 4:45 PM</span>
+                            </div>
+                            <p class="text-sm text-text-secondary mt-1">FMLA documentation updated and employee notification sent. Case closed successfully.</p>
+                            <div class="flex items-center space-x-4 mt-2">
+                                <span class="text-xs bg-success/20 text-success px-2 py-1 rounded-full">Resolved</span>
+                                <button class="text-xs text-primary hover:text-primary-600 transition-smooth">View Report</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info Event -->
+                    <div class="flex items-start space-x-4 p-4 bg-primary/5 border-l-4 border-primary rounded-r-lg cursor-pointer hover:bg-primary/10 transition-smooth">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-3 h-3 bg-primary rounded-full"></div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-sm font-medium text-text-primary">Scheduled Audit Report Generated</h4>
+                                <span class="text-xs text-text-tertiary">Sep 5, 2025 9:00 AM</span>
+                            </div>
+                            <p class="text-sm text-text-secondary mt-1">Monthly compliance report automatically generated and distributed to stakeholders.</p>
+                            <div class="flex items-center space-x-4 mt-2">
+                                <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">Automated</span>
+                                <button class="text-xs text-primary hover:text-primary-600 transition-smooth">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Alert Feed (4 cols equivalent) -->
+            <div class="lg:col-span-1 bg-surface rounded-xl p-6 card-elevation">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-text-primary">Live Alerts</h3>
+                        <p class="text-text-secondary text-sm">Real-time monitoring</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-error text-white text-xs px-2 py-1 rounded-full">2</span>
+                        <span class="bg-warning text-white text-xs px-2 py-1 rounded-full">5</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-4 max-h-96 overflow-y-auto">
+                    <!-- High Priority Alert -->
+                    <div class="p-3 bg-error/10 border border-error/20 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs bg-error text-white px-2 py-1 rounded-full">HIGH</span>
+                            <span class="text-xs text-text-tertiary">2 min ago</span>
+                        </div>
+                        <h4 class="text-sm font-medium text-text-primary mb-1">Data Breach Attempt</h4>
+                        <p class="text-xs text-text-secondary">Unauthorized access to employee records detected</p>
+                        <button class="text-xs text-error hover:text-error-600 mt-2 transition-smooth">Respond</button>
+                    </div>
+
+                    <!-- Medium Priority Alert -->
+                    <div class="p-3 bg-warning/10 border border-warning/20 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs bg-warning text-white px-2 py-1 rounded-full">MED</span>
+                            <span class="text-xs text-text-tertiary">15 min ago</span>
+                        </div>
+                        <h4 class="text-sm font-medium text-text-primary mb-1">Policy Update Required</h4>
+                        <p class="text-xs text-text-secondary">New state regulation requires policy revision</p>
+                        <button class="text-xs text-warning hover:text-warning-600 mt-2 transition-smooth">Review</button>
+                    </div>
+
+                    <!-- Medium Priority Alert -->
+                    <div class="p-3 bg-warning/10 border border-warning/20 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs bg-warning text-white px-2 py-1 rounded-full">MED</span>
+                            <span class="text-xs text-text-tertiary">32 min ago</span>
+                        </div>
+                        <h4 class="text-sm font-medium text-text-primary mb-1">Audit Trail Gap</h4>
+                        <p class="text-xs text-text-secondary">Missing log entries for 2-hour period</p>
+                        <button class="text-xs text-warning hover:text-warning-600 mt-2 transition-smooth">Investigate</button>
+                    </div>
+
+                    <!-- Low Priority Alert -->
+                    <div class="p-3 bg-primary/10 border border-primary/20 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs bg-primary text-white px-2 py-1 rounded-full">LOW</span>
+                            <span class="text-xs text-text-tertiary">1 hr ago</span>
+                        </div>
+                        <h4 class="text-sm font-medium text-text-primary mb-1">Backup Completed</h4>
+                        <p class="text-xs text-text-secondary">Daily compliance data backup successful</p>
+                        <button class="text-xs text-primary hover:text-primary-600 mt-2 transition-smooth">View Log</button>
+                    </div>
+
+                    <!-- System Alert -->
+                    <div class="p-3 bg-surface-700 border border-subtle rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs bg-surface-600 text-text-secondary px-2 py-1 rounded-full">INFO</span>
+                            <span class="text-xs text-text-tertiary">2 hr ago</span>
+                        </div>
+                        <h4 class="text-sm font-medium text-text-primary mb-1">System Maintenance</h4>
+                        <p class="text-xs text-text-secondary">Scheduled maintenance window completed</p>
+                        <button class="text-xs text-text-secondary hover:text-text-primary mt-2 transition-smooth">Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comprehensive Audit Log Table -->
+        <div class="bg-surface rounded-xl p-6 card-elevation mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-text-primary">Audit Log</h3>
+                    <p class="text-text-secondary text-sm">User activities, data modifications, and system access</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Search -->
+                    <div class="relative">
+                        <input type="text" placeholder="Search audit logs..." class="bg-surface-700 border border-subtle rounded-lg pl-10 pr-4 py-2 text-text-primary placeholder-text-tertiary focus:ring-2 focus:ring-primary focus:border-transparent" />
+                        <svg class="absolute left-3 top-2.5 h-5 w-5 text-text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    
+                    <!-- Filter -->
+                    <select class="bg-surface-700 border border-subtle rounded-lg px-3 py-2 text-text-primary focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option>All Activities</option>
+                        <option>Login/Logout</option>
+                        <option>Data Access</option>
+                        <option>Data Modification</option>
+                        <option>System Changes</option>
+                        <option>Policy Violations</option>
+                    </select>
+                    
+                    <!-- Export -->
+                    <button class="bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-lg font-medium transition-smooth flex items-center space-x-2">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span>Export</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full data-table">
+                    <thead>
+                        <tr class="border-b border-subtle">
+                            <th class="text-left py-3 px-4 text-text-secondary font-medium text-sm">Timestamp</th>
+                            <th class="text-left py-3 px-4 text-text-secondary font-medium text-sm">User</th>
+                            <th class="text-left py-3 px-4 text-text-secondary font-medium text-sm">Action</th>
+                            <th class="text-left py-3 px-4 text-text-secondary font-medium text-sm">Resource</th>
+                            <th class="text-left py-3 px-4 text-text-secondary font-medium text-sm">IP Address</th>
+                            <th class="text-left py-3 px-4 text-text-secondary font-medium text-sm">Status</th>
+                            <th class="text-left py-3 px-4 text-text-secondary font-medium text-sm">Risk Level</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-subtle">
+                        <tr class="hover:bg-surface-700 transition-smooth">
+                            <td class="py-3 px-4 text-text-primary text-sm">Sep 7, 2025 6:25 AM</td>
+                            <td class="py-3 px-4 text-text-primary text-sm">sarah.johnson@company.com</td>
+                            <td class="py-3 px-4 text-text-primary text-sm">Login</td>
+                            <td class="py-3 px-4 text-text-secondary text-sm">HR Dashboard</td>
+                            <td class="py-3 px-4 text-text-secondary text-sm">192.168.1.45</td>
+                            <td class="py-3 px-4"><span class="bg-success/20 text-success px-2 py-1 rounded-full text-xs">Success</span></td>
+                            <td class="py-3 px-4"><span class="bg-success/20 text-success px-2 py-1 rounded-full text-xs">Low</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-700 transition-smooth">
+                            <td class="py-3 px-4 text-text-primary text-sm">Sep 7, 2025 6:20 AM</td>
+                            <td class="py-3 px-4 text-text-primary text-sm">michael.chen@company.com</td>
+                            <td class="py-3 px-4 text-text-primary text-sm">Data Export</td>
+                            <td class="py-3 px-4 text-text-secondary text-sm">Employee Records</td>
+                            <td class="py-3 px-4 text-text-secondary text-sm">192.168.1.67</td>
+                            <td class="py-3 px-4"><span class="bg-success/20 text-success px-2 py-1 rounded-full text-xs">Success</span></td>
+                            <td class="py-3 px-4"><span class="bg-warning/20 text-warning px-2 py-1 rounded-full text-xs">Medium</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-700 transition-smooth">
+                            <td class="py-3 px-4 text-text-primary text-sm">Sep 7, 2025 6:15 AM</td>
+                            <td class="py-3 px-4 text-text-primary text-sm">unknown</td>
+                            <td class="py-3 px-4 text-text-primary text-sm">Failed Login</td>
+                            <td class="py-3 px-4 text-text-secondary text-sm">Admin Panel</td>
+                            <td class="py-3 px-4 text-text-secondary text-sm">203.45.67.89</td>
+                            <td class="py-3 px-4"><span class="bg-error/20 text-error px-2 py-1 rounded-full text-xs">Failed</span></td>
+                            <td class="py-3 px-4"><span class="bg-error/20 text-error px-2 py-1 rounded-full text-xs">High</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-700 transition-smooth">
+                            <td class="py-3 px-4 text-text-primary text-sm">Sep 7, 2025 6:10 AM</td>
+                            <td class="py-3 px-4 text-text-primary text-sm">lisa.martinez@company.com</td>
+                            <td class="py-3 px-4 text-text-primary text-sm">Policy Update</td>
+                            <td class="py-3 px-4 text-text-secondary text-sm">FMLA Policy</td>
+                            <td class="py-3 px-4 text-text-secondary text-sm">192.168.1.23</td>
+                            <td class="py-3 px-4"><span class="bg-success/20 text-success px-2 py-1 rounded-full text-xs">Success</span></td>
+                            <td class="py-3 px-4"><span class="bg-warning/20 text-warning px-2 py-1 rounded-full text-xs">Medium</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-700 transition-smooth">
+                            <td class="py-3 px-4 text-text-primary text-sm">Sep 7, 2025 6:05 AM</td>
+                            <td class="py-3 px-4 text-text-primary text-sm">system</td>
+                            <td class="py-3 px-4 text-text-primary text-sm">Automated Backup</td>
+                            <td class="py-3 px-4 text-text-secondary text-sm">Compliance Data</td>
+                            <td class="py-3 px-4 text-text-secondary text-sm">localhost</td>
+                            <td class="py-3 px-4"><span class="bg-success/20 text-success px-2 py-1 rounded-full text-xs">Success</span></td>
+                            <td class="py-3 px-4"><span class="bg-success/20 text-success px-2 py-1 rounded-full text-xs">Low</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="flex items-center justify-between mt-6">
+                <div class="text-sm text-text-secondary">
+                    Showing 1 to 5 of 1,247 entries
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="px-3 py-2 text-text-secondary hover:text-text-primary border border-subtle rounded-lg hover:bg-surface-700 transition-smooth">Previous</button>
+                    <button class="px-3 py-2 bg-primary text-white rounded-lg">1</button>
+                    <button class="px-3 py-2 text-text-secondary hover:text-text-primary border border-subtle rounded-lg hover:bg-surface-700 transition-smooth">2</button>
+                    <button class="px-3 py-2 text-text-secondary hover:text-text-primary border border-subtle rounded-lg hover:bg-surface-700 transition-smooth">3</button>
+                    <button class="px-3 py-2 text-text-secondary hover:text-text-primary border border-subtle rounded-lg hover:bg-surface-700 transition-smooth">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Analytics -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Violation Trend Analysis -->
+            <div class="bg-surface rounded-xl p-6 card-elevation">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-text-primary">Violation Trends</h3>
+                        <p class="text-text-secondary text-sm">Policy violations over time</p>
+                    </div>
+                    <button class="text-text-secondary hover:text-text-primary transition-smooth">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="h-64">
+                    <canvas id="violationTrendChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Compliance Score Forecasting -->
+            <div class="bg-surface rounded-xl p-6 card-elevation">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-text-primary">Compliance Forecast</h3>
+                        <p class="text-text-secondary text-sm">Predicted compliance scores</p>
+                    </div>
+                    <button class="text-text-secondary hover:text-text-primary transition-smooth">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="h-64">
+                    <canvas id="complianceForecastChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Actions -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-end">
+            <button class="bg-surface-700 hover:bg-surface-600 text-text-primary px-6 py-3 rounded-lg font-medium transition-smooth flex items-center space-x-2">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a4 4 0 01-4-4V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <span>Generate Audit Report</span>
+            </button>
+            <button class="bg-primary hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-medium transition-smooth flex items-center space-x-2">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <span>Export Compliance Data</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-subtle">
+        <div class="grid grid-cols-5 gap-1">
+            <a href="executive_hr_overview_dashboard.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"/>
+                </svg>
+                <span class="text-xs mt-1">Overview</span>
+            </a>
+            <a href="real_time_attendance_monitoring_dashboard.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-xs mt-1">Attendance</span>
+            </a>
+            <a href="payroll_analytics_and_cost_intelligence_dashboard.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                </svg>
+                <span class="text-xs mt-1">Payroll</span>
+            </a>
+            <a href="employee_performance_and_productivity_analytics_dashboard.html" class="flex flex-col items-center py-2 px-1 text-text-secondary">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+                <span class="text-xs mt-1">Performance</span>
+            </a>
+            <a href="compliance_and_audit_trail_dashboard.html" class="flex flex-col items-center py-2 px-1 text-primary">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-xs mt-1">Compliance</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Compliance Timeline Chart
+            const timelineCtx = document.getElementById('complianceTimelineChart').getContext('2d');
+            new Chart(timelineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                    datasets: [{
+                        label: 'Compliance Events',
+                        data: [12, 8, 15, 6, 9, 11, 7, 13, 10],
+                        borderColor: '#00CED1',
+                        backgroundColor: 'rgba(0, 206, 209, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Violations',
+                        data: [3, 2, 5, 1, 2, 4, 2, 3, 2],
+                        borderColor: '#FF6B6B',
+                        backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Corrective Actions',
+                        data: [2, 1, 4, 1, 1, 3, 1, 2, 1],
+                        borderColor: '#00C896',
+                        backgroundColor: 'rgba(0, 200, 150, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#E0E0E0'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#BDBDBD'
+                            },
+                            grid: {
+                                color: 'rgba(224, 224, 224, 0.1)'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#BDBDBD'
+                            },
+                            grid: {
+                                color: 'rgba(224, 224, 224, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Violation Trend Chart
+            const violationCtx = document.getElementById('violationTrendChart').getContext('2d');
+            new Chart(violationCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['FLSA', 'FMLA', 'State Laws', 'GDPR', 'SOX', 'Other'],
+                    datasets: [{
+                        label: 'Violations',
+                        data: [3, 1, 2, 0, 1, 0],
+                        backgroundColor: [
+                            '#FF6B6B',
+                            '#FFB020',
+                            '#FF6B6B',
+                            '#00C896',
+                            '#FFB020',
+                            '#00C896'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#BDBDBD'
+                            },
+                            grid: {
+                                color: 'rgba(224, 224, 224, 0.1)'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#BDBDBD'
+                            },
+                            grid: {
+                                color: 'rgba(224, 224, 224, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Compliance Forecast Chart
+            const forecastCtx = document.getElementById('complianceForecastChart').getContext('2d');
+            new Chart(forecastCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'],
+                    datasets: [{
+                        label: 'Actual Score',
+                        data: [92, null, null, null, null, null],
+                        borderColor: '#00CED1',
+                        backgroundColor: 'rgba(0, 206, 209, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Predicted Score',
+                        data: [92, 94, 95, 93, 96, 97],
+                        borderColor: '#FFB020',
+                        backgroundColor: 'rgba(255, 176, 32, 0.1)',
+                        borderDash: [5, 5],
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#E0E0E0'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#BDBDBD'
+                            },
+                            grid: {
+                                color: 'rgba(224, 224, 224, 0.1)'
+                            }
+                        },
+                        y: {
+                            min: 85,
+                            max: 100,
+                            ticks: {
+                                color: '#BDBDBD'
+                            },
+                            grid: {
+                                color: 'rgba(224, 224, 224, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Real-time alert simulation
+        function simulateRealTimeAlerts() {
+            const alertContainer = document.querySelector('.lg\\:col-span-1 .space-y-4');
+            
+            // Simulate new alert every 30 seconds
+            setInterval(() => {
+                const alerts = [
+                    {
+                        priority: 'HIGH',
+                        title: 'Suspicious Login Activity',
+                        description: 'Multiple failed attempts from foreign IP',
+                        color: 'error'
+                    },
+                    {
+                        priority: 'MED',
+                        title: 'Policy Compliance Check',
+                        description: 'Quarterly review reminder triggered',
+                        color: 'warning'
+                    },
+                    {
+                        priority: 'LOW',
+                        title: 'System Health Check',
+                        description: 'All systems operating normally',
+                        color: 'primary'
+                    }
+                ];
+                
+                const randomAlert = alerts[Math.floor(Math.random() * alerts.length)];
+                
+                // Create new alert element (would be added to top in real implementation)
+                console.log('New alert:', randomAlert.title);
+            }, 30000);
+        }
+
+        // Initialize real-time features
+        simulateRealTimeAlerts();
+
+        // Search functionality
+        document.querySelector('input[placeholder="Search audit logs..."]').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
